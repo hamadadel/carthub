@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'parent_id', 'order'];
+    protected $fillable = ['name'];
 
     // [Scope] allow us to only grab the parents of this category
     public function scopeParents(Builder $builder)
