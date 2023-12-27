@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->smallInteger('')->unsigned()->nullable();
+            $table->smallInteger('order')->unsigned()->nullable();
         });
     }
 

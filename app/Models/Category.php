@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug', 'parent_id', 'order'];
 
     // [Scope] allow us to only grab the parents of this category
     public function scopeParents(Builder $builder)
@@ -18,7 +18,7 @@ class Category extends Model
         $builder->whereNull('parent_id');
     }
 
-    public function scopeOrdered(Builder $builder, $direction = 'desc')
+    public function scopeOrdered(Builder $builder, $direction = 'asc')
     {
         $builder->orderBy('order', $direction);
     }
