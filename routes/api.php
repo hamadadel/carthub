@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Category;
+use App\Http\Controllers\Categories\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,11 +17,4 @@ use App\Models\Category;
 //     return $request->user();
 // });
 
-Route::get('/', function () {
-    return 'hello';
-});
-
-Route::get('/', function () {
-    $categories = Category::parents()->ordered()->get();
-    dd($categories);
-});
+Route::get('/categories', [CategoryController::class, 'index']);
