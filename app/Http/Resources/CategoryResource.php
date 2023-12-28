@@ -17,6 +17,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'parent_id' => $this->parent_id,
             'slug' => $this->slug,
             'children' => CategoryResource::collection(
                 // only ever show the children if we eager load in the children
