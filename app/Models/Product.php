@@ -12,8 +12,8 @@ class Product extends Model
     public function getRouteKeyName()
     {
         /**
-         * that means that when we look these up inside our roots
-         * we're going to use the slug to return this.
+         * that means that when we look these up inside our routes
+         * we're going to use the slug.
          */
         return 'slug';
     }
