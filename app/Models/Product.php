@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Scoping\Scoper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -16,5 +18,16 @@ class Product extends Model
          * we're going to use the slug.
          */
         return 'slug';
+    }
+
+
+    public function scopeWithScopes(Builder $builder, $scopes = [])
+    {
+        return (new Scoper(request()))->apply($builder, $scopes);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Products;
 
-use App\Models\Product;
-use PHPUnit\Framework\TestCase;
+use App\Models\{Product, Category};
+use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
@@ -14,5 +14,14 @@ class ProductTest extends TestCase
     {
         $product = new Product();
         $this->assertEquals($product->getRouteKeyName(), 'slug');
+    }
+
+    public function test_it_hasMany_categories()
+    {
+        $product = Product::factory()->create();
+        $product->categories()->save(
+            Category::factory()->create()
+        );
+        $this->assertInstanceOf(Category::class, $product->categories()->first());
     }
 }
