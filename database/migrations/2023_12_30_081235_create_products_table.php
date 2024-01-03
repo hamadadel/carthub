@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->float('price');
+            $table->float('price')->nullable();
             $table->timestamps();
         });
     }

@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasChildren;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, HasChildren;
 
     protected $fillable = ['name', 'slug', 'parent_id', 'order'];
 
-    // [Scope] allow us to only grab the parents of this category
     public function scopeParents(Builder $builder)
     {
         $builder->whereNull('parent_id');
@@ -21,13 +21,6 @@ class Category extends Model
     public function scopeOrdered(Builder $builder, $direction = 'asc')
     {
         $builder->orderBy('order', $direction);
-    }
-
-    // get all Category Children
-
-    public function children()
-    {
-        return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
     public function products()
