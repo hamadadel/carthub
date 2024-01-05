@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ProductVariation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class StockFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'quantity' => 1,
+            'product_variation_id' => ProductVariation::factory()->create()->id,
         ];
     }
 }

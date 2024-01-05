@@ -4,9 +4,11 @@ namespace Tests\Unit\Products;
 
 use App\Cart\Money;
 use Tests\TestCase;
+use App\Models\Stock;
 use App\Models\Product;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationType;
+use Database\Factories\StockFactory;
 
 class ProductVariationTest extends TestCase
 {
@@ -61,5 +63,15 @@ class ProductVariationTest extends TestCase
         ]);
 
         $this->assertTrue($productVariation->priceVaries());
+    }
+
+    public function test_it_hasMany_stocks()
+    {
+        $productVariation = ProductVariation::factory()->create();
+        $productVariation->stocks()->save(
+            Stock::factory()->create()
+        );
+
+        $this->assertInstanceOf(Stock::class, $productVariation->stocks->first());
     }
 }
