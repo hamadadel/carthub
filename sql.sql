@@ -26,3 +26,10 @@ name = '1kg', product_variations.order = 3, product_variation_type_id = 2,create
 
 
 -- insert into users set name='Alex Garrett-Smith', email='alex@codecourse.com', password='password', created_at=now(), updated_at=now();
+
+ select count(product_variation_types.id), product_variation_types.name 
+ from product_variations 
+ inner join product_variation_types 
+ on product_variations.product_variation_type_id = product_variation_types.id
+group by product_variation_types.id;
+
