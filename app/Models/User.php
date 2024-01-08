@@ -34,6 +34,16 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->password = bcrypt($user->password);
+        });
+    }
+
     /**
      * The attributes that should be cast.
      *
