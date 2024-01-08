@@ -13,7 +13,6 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("
-
        CREATE VIEW product_variation_stock_view AS
        SELECT 
        product_variations.product_id AS product_id,

@@ -74,4 +74,14 @@ class ProductVariationTest extends TestCase
 
         $this->assertInstanceOf(Stock::class, $productVariation->stocks->first());
     }
+
+    // stock relationship in productVariation@model
+    public function test_it_has_stock_information()
+    {
+        $productVariation = ProductVariation::factory()->create();
+        $productVariation->stock()->save(
+            Stock::factory()->create()
+        );
+        $this->assertInstanceOf(ProductVariation::class, $productVariation->stock->first());
+    }
 }
