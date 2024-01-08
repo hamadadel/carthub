@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Categories\CategoryController;
 use App\Http\Controllers\Products\ProductController;
@@ -20,3 +21,8 @@ use App\Http\Controllers\Products\ProductController;
 
 Route::resource('/categories', CategoryController::class);
 Route::resource('/products', ProductController::class);
+
+Route::group(['prefix' => 'auth'], function () {
+
+    Route::post('register', RegisterController::class);
+});
