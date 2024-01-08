@@ -4,14 +4,15 @@ namespace Tests\Unit\Models\Categories;
 
 use Tests\TestCase;
 // use Illuminate\Foundation\Testing\WithFaker;
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 // use PHPUnit\Framework\TestCase;
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Collection;
 
 class CategoryTest extends TestCase
 {
+
+    use RefreshDatabase;
     /**
      * A basic unit test example.
      */

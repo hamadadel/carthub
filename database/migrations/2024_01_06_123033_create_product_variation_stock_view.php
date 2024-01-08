@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("
-       CREATE VIEW product_variation_stock_view AS
+       CREATE OR REPLACE VIEW product_variation_stock_view AS
        SELECT 
        product_variations.product_id AS product_id,
        product_variations.id AS product_variation_id,
@@ -38,7 +38,8 @@ return new class extends Migration
            FROM product_variation_order
            GROUP BY product_variation_order.product_variation_id
        ) AS product_variation_order USING (id)
-       GROUP BY product_variations.id");
+       GROUP BY product_variations.id
+       ");
     }
 
     /**

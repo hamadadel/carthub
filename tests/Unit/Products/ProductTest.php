@@ -2,15 +2,16 @@
 
 namespace Tests\Unit\Products;
 
-use App\Models\{Product, Category, ProductVariation};
 use App\Cart\Money;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\{Product, Category, ProductVariation, Stock};
 
 class ProductTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     */
+
+    use RefreshDatabase;
+
     public function test_it_uses_the_slug_for_the_route_key_name(): void
     {
         $product = new Product();
@@ -47,5 +48,28 @@ class ProductTest extends TestCase
             ['price' => 1000]
         );
         $this->assertEquals($product->formattedPrice, '£10.00');
+    }
+
+    // 30
+    public function test_it_can_check_if_its_in_stock()
+    {
+        $product = Product::factory()->create();
+        $product->variations()->save(
+            $productVariation = ProductVariation::factory()->create()
+        );
+        $productVariation->stocks()->save(Stock::factory()->make());
+        $this->assertTrue($product->inStock());
+    }
+
+    public function test_it_can_get_the_stock_count()
+    {
+        $product = Product::factory()->create();
+        $product->variations()->save(
+            $productVariation = ProductVariation::factory()->create()
+        );
+        $productVariation->stocks()->save(Stock::factory()->make(
+            ['quantity' => $quantity = 5]
+        ));
+        $this->assertEquals($product->stockCount(), $quantity);
     }
 }

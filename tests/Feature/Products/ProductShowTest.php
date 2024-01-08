@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductShowTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_it_fails_if_a_product_cant_be_found(): void
     {
         $this->json('GET', 'api/product/nope-product')

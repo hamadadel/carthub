@@ -10,6 +10,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductScopingTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_it_can_scope_by_category()
     {
         $product = Product::factory()->create();

@@ -3,9 +3,6 @@
 namespace App\Models\Traits;
 
 use App\Cart\Money;
-use NumberFormatter;
-use Money\Formatter\IntlMoneyFormatter;
-use Money\Currencies\ISOCurrencies;
 
 trait HasPrice
 {
