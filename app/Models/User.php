@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -35,14 +36,15 @@ class User extends Authenticatable implements JWTSubject
     ];
 
 
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($user) {
-            $user->password = bcrypt($user->password);
-        });
-    }
+    // Observer automatically hashes the password every time create a new user
+    // public static function boot()
+    // {
+    //     parent::boot();
+    //     static::creating(function ($user) {
+    //         dd($user->password);
+    //         $user->password = Hash::make($user->password);
+    //     });
+    // }
 
     /**
      * The attributes that should be cast.
@@ -57,7 +59,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getJWTIdentifier()
     {
-        return $this->id;
+        return $this->getKey();
     }
 
     public function getJWTCustomClaims()
