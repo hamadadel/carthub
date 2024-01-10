@@ -16,7 +16,7 @@ class LoginController extends Controller
         $token = JWTAuth::attempt($request->only('email', 'password'));
         if (!$token)
             return response()->json([
-                'error' =>  'Wrong Credentials'
+                'errors' => ['message' => 'Wrong Credentials']
             ], 422);
 
 
